@@ -1,0 +1,26 @@
+from PIL import Image, ImageDraw, ImageFont
+
+# Create image
+img = Image.new('RGBA', (200, 200), (255, 255, 255, 0))
+draw = ImageDraw.Draw(img)
+
+# Draw circle background
+draw.ellipse((10, 10, 190, 190), fill=(0, 173, 181))
+
+# Add text "A"
+try:
+    font = ImageFont.truetype("DejaVuSans-Bold.ttf", 80)
+except:
+    font = ImageFont.load_default()
+
+text = "A"
+bbox = draw.textbbox((0, 0), text, font=font)
+w, h = bbox[2] - bbox[0], bbox[3] - bbox[1]
+
+draw.text(((200 - w) / 2, (200 - h) / 2), text, fill="white", font=font)
+
+# Save image
+file_path = "/mnt/data/logo_A.png"
+img.save(file_path)
+
+file_path
